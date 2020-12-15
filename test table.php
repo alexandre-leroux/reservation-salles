@@ -42,14 +42,7 @@ require('fonctions/fonctions.php');
             </div>
         </nav>
 
-
-        <!-- Masthead-->
-
-
-
-
-        <!-- Portfolio Section-->
-
+<a href=""><div></div></a>
            
 
 <div class="container-fluid mt-5 pt-5 ">
@@ -57,10 +50,10 @@ require('fonctions/fonctions.php');
 <div class="col-12">
 
 <div class="table-responsive">
-    <h1>JANVIER 2021</h1>
-<table class="table table-bordered " id="entriestable">
+    <h1 class="text-center m-5 ">JANVIER 2021</h1>
+<table class="table table-bordered " >
 <thead>
-    <tr>
+    <tr class="text-center ">
         <td id="heure">heure</td>
         <td class="jour-semaine">Lundi 4</td>
         <td class="jour-semaine">Mardi 5</td>
@@ -76,19 +69,6 @@ require('fonctions/fonctions.php');
 
 
 $bdd = connection_bdd();
- 
-        $req = $bdd->prepare(' SELECT * FROM reservations WHERE  DATE_FORMAT(debut, "%h") = :heure_debut AND DATE_FORMAT(debut, "%e") = :jour ');
-        $req->execute(array( 'heure_debut' => 12,
-                             'jour' => 6  ));
-        $donnees = $req->fetch();
-        var_dump($donnees);
-
-
-
-
-
-
-
 
 
 
@@ -102,34 +82,35 @@ while ( $plage_horaire< 23)
 
   
   <tbody class="mt-5">
-    <tr>
-        <td class="text-nowrap "><?php echo $heuredebut.'h à '. $heurefin.'h'      ;?></td>
+    <tr class="text-center " >
+        <td class="text-nowrap  "><?php echo $heuredebut.'h à '. $heurefin.'h'      ;?></td>
 
-        <td><?php    $day = 4;    recherche_reservation($bdd, $heuredebut,$day); $day++;  ?></td>
+        <td class="align-middle mb-0 p-0"><?php    $day = 4;      definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;  ?></td>
 
-        <td><?php       recherche_reservation($bdd, $heuredebut,$day);   $day++;   ?></td>
+        <td class="align-middle mb-0 p-0"><?php                   definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;   ?></td>
 
-        <td><?php       recherche_reservation($bdd, $heuredebut,$day);   $day++;   ?></td>
+        <td class="align-middle mb-0 p-0"><?php                    definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;  ?></td>
 
-        <td><?php       recherche_reservation($bdd, $heuredebut,$day);   $day++;   ?></td>
+        <td class="align-middle mb-0 p-0"><?php                    definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;  ?></td>
 
-        <td><?php       recherche_reservation($bdd, $heuredebut,$day);   $day++;   ?></td>
+        <td class="align-middle mb-0 p-0"><?php                    definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;  ?></td>
 
-        <td><?php       recherche_reservation($bdd, $heuredebut,$day);   $day++;   ?></td>
+        <td class="align-middle mb-0 p-0"><?php                    definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;    ?></td>
 
-        <td><?php       recherche_reservation($bdd, $heuredebut,$day);  ?></td>
+        <td class="align-middle mb-0 p-0"><?php                    definition_champs($bdd, $heuredebut, $day, $heurefin);   ?></td>
 
     </tr>
   </tbody>
 
 
-  
+
 <?php $plage_horaire++;$heuredebut++;$heurefin++;
 }
 
 
 ?>
 </table>
+<?php $bdd = null; ?>
 
     </div>
     </div>
@@ -145,5 +126,9 @@ while ( $plage_horaire< 23)
         <script src="assets/mail/contact_me.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+
+
+
+        
     </body>
 </html>

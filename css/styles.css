@@ -10,11 +10,18 @@
   width: 200px ! important;
 }
 
-/* #entriestable thead{
+.test_lien{
+color: rgb(207, 207, 207);
+text-decoration: none! important;
+}
+.test_lien:hover{
+  color: rgb(161, 142, 142);
+}
 
-  position:fixed;
+.lien_reserve{
 
-} */
+    text-decoration: none! important;
+}
 
 
 
