@@ -17,6 +17,9 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
 
+    <?php
+require('fonctions/fonctions.php');
+?>
 
     <body id="page-top">
 
@@ -72,14 +75,7 @@
 
 
 
-        try 
-        {
-            $bdd = new PDO('mysql:host=localhost;dbname=reservationsalles;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        }
-    catch (Exception $e)
-        {
-            die('Erreur : ' . $e->getMessage());
-        }
+$bdd = connection_bdd();
  
         $req = $bdd->prepare(' SELECT * FROM reservations WHERE  DATE_FORMAT(debut, "%h") = :heure_debut AND DATE_FORMAT(debut, "%e") = :jour ');
         $req->execute(array( 'heure_debut' => 12,
@@ -98,7 +94,6 @@
 
 
 $plage_horaire=0;
-
 $heuredebut =1;
 $heurefin = 2;
 
@@ -109,25 +104,36 @@ while ( $plage_horaire< 23)
   <tbody class="mt-5">
     <tr>
         <td class="text-nowrap "><?php echo $heuredebut.'h à '. $heurefin.'h'      ;?></td>
-        <td >@mdo</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+
+        <td><?php    $day = 4;    recherche_reservation($bdd, $heuredebut,$day); $day++;  ?></td>
+
+        <td><?php       recherche_reservation($bdd, $heuredebut,$day);   $day++;   ?></td>
+
+        <td><?php       recherche_reservation($bdd, $heuredebut,$day);   $day++;   ?></td>
+
+        <td><?php       recherche_reservation($bdd, $heuredebut,$day);   $day++;   ?></td>
+
+        <td><?php       recherche_reservation($bdd, $heuredebut,$day);   $day++;   ?></td>
+
+        <td><?php       recherche_reservation($bdd, $heuredebut,$day);   $day++;   ?></td>
+
+        <td><?php       recherche_reservation($bdd, $heuredebut,$day);  ?></td>
+
     </tr>
   </tbody>
 
 
+  
 <?php $plage_horaire++;$heuredebut++;$heurefin++;
 }
+
+
 ?>
 </table>
 
-</div>
-</div>
-</div>
+    </div>
+    </div>
+    </div>
 </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
