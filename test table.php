@@ -80,9 +80,10 @@
         {
             die('Erreur : ' . $e->getMessage());
         }
-        
-        $req = $bdd->prepare(' SELECT * FROM reservations WHERE  DATE_FORMAT(debut, "%h") = :heure ');//on va chercher dans la bdd si le login existe déjà
-        $req->execute(array( 'heure' => 12  ));
+ 
+        $req = $bdd->prepare(' SELECT * FROM reservations WHERE  DATE_FORMAT(debut, "%h") = :heure_debut AND DATE_FORMAT(debut, "%e") = :jour ');
+        $req->execute(array( 'heure_debut' => 12,
+                             'jour' => 6  ));
         $donnees = $req->fetch();
         var_dump($donnees);
 
