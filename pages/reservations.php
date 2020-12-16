@@ -46,9 +46,33 @@ require('../fonctions/fonctions.php');
 
 <?php
 echo '<pre>';
-var_dump($donnees['titre']);
+var_dump($_GET['id']);
 echo '</pre>';
+echo $_GET['id'];
 
+
+try 
+{
+    $bdd = new PDO('mysql:host=localhost;dbname=reservationsalles;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+}
+catch (Exception $e)
+{
+    die('Erreur : ' . $e->getMessage());
+}
+
+
+
+
+
+
+
+$req = $bdd->prepare(' SELECT * FROM reservations WHERE id = :id ');
+$req->execute(array( 'id' => $_GET['id']
+                     ));
+$donnees = $req->fetch(PDO::FETCH_ASSOC);
+echo '<pre>';
+var_dump($donnees);
+echo '</pre>';
 
 
 

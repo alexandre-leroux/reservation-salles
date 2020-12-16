@@ -28,9 +28,12 @@ function recherche_reservation($bdd, $heuredebut, $day)
     // echo '</pre>';
     if ( $donnees!= null)
 
-    {?>
+    {
+        $_GET_['id'] = $donnees['id'];
+
+        ?>
         
-        <a class="lien_reserve mb-0 p-0" href="pages/reservations.php"><div class="bg-primary text-dark"><?php echo $donnees['login']?></br><span class="text-muted "><?php echo $donnees['titre']?></span></div></a>
+        <a class="lien_reserve mb-0 p-0" href="pages/reservations.php?id=<?php echo $_GET_['id'];?> "><div class="bg-primary text-dark"><?php echo $donnees['login']?></br><span class="text-muted "><?php echo $donnees['titre']?></span></div></a>
 
     <?php
     }
