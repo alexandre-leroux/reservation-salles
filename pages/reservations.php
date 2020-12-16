@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,18 +9,18 @@
         <meta name="author" content="" />
         <title>Freelancer - Start Bootstrap Theme</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
     </head>
 
     <?php
-require('fonctions/fonctions.php');
+require('../fonctions/fonctions.php');
 ?>
 
     <body id="page-top">
@@ -42,79 +44,17 @@ require('fonctions/fonctions.php');
             </div>
         </nav>
 
-<a href=""><div></div></a>
-           
-
-<div class="container-fluid mt-5 pt-5 ">
-<div class="row ">
-<div class="col-12">
-
-<div class="table-responsive">
-    <h1 class="text-center m-5 ">JANVIER 2021</h1>
-<table class="table table-bordered " >
-<thead>
-    <tr class="text-center ">
-        <td id="heure">heure</td>
-        <td class="jour-semaine">Lundi 4</td>
-        <td class="jour-semaine">Mardi 5</td>
-        <td class="jour-semaine">Mercredi 6</td>
-        <td class="jour-semaine">Jeudi 7</td>
-        <td class="jour-semaine">Vendredi 8</td>
-        <td class="jour-semaine">Samedi 9</td>
-        <td class="jour-semaine">Dimanche 10</td>
-    </tr>
-  </thead>
 <?php
+echo '<pre>';
+var_dump($_SESSION[$g]);
+echo '</pre>';
 
 
-
-$bdd = connection_bdd();
-
-
-
-
-$plage_horaire=0;
-$heuredebut =1;
-$heurefin = 2;
-
-while ( $plage_horaire< 23)
-{?>
-
-  
-  <tbody class="mt-5">
-    <tr class="text-center " >
-        <td class="text-nowrap  "><?php echo $heuredebut.'h à '. $heurefin.'h'      ;?></td>
-
-        <td class="align-middle mb-0 p-0"><?php    $day = 4;      definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;  ?></td>
-
-        <td class="align-middle mb-0 p-0"><?php                   definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;   ?></td>
-
-        <td class="align-middle mb-0 p-0"><?php                   definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;  ?></td>
-
-        <td class="align-middle mb-0 p-0"><?php                   definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;  ?></td>
-
-        <td class="align-middle mb-0 p-0"><?php                   definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;  ?></td>
-
-        <td class="align-middle mb-0 p-0"><?php                   definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;    ?></td>
-
-        <td class="align-middle mb-0 p-0"><?php                   definition_champs($bdd, $heuredebut, $day, $heurefin);   ?></td>
-
-    </tr>
-  </tbody>
-
-
-
-<?php $plage_horaire++;$heuredebut++;$heurefin++;
-}
 
 
 ?>
-</table>
-<?php $bdd = null; ?>
+  
 
-    </div>
-    </div>
-    </div>
 </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -122,10 +62,10 @@ while ( $plage_horaire< 23)
         <!-- Third party plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <!-- Contact form JS-->
-        <script src="assets/mail/jqBootstrapValidation.js"></script>
-        <script src="assets/mail/contact_me.js"></script>
+        <script src="../assets/mail/jqBootstrapValidation.js"></script>
+        <script src="../assets/mail/contact_me.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="../js/scripts.js"></script>
 
 
 

@@ -18,7 +18,7 @@ catch (Exception $e)
 
 function recherche_reservation($bdd, $heuredebut, $day)
 {
-    $req = $bdd->prepare(' SELECT * FROM reservations INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id WHERE  DATE_FORMAT(debut, "%h") = :heure_debut AND DATE_FORMAT(debut, "%e") = :jour ');
+    $req = $bdd->prepare(' SELECT * FROM reservations INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id WHERE  DATE_FORMAT(debut, "%k") = :heure_debut AND DATE_FORMAT(debut, "%e") = :jour ');
     $req->execute(array( 'heure_debut' => $heuredebut,
                          'jour' => $day  ));
     $donnees = $req->fetch(PDO::FETCH_ASSOC);
