@@ -46,7 +46,7 @@ require('../fonctions/fonctions.php');
 
 <?php
 echo '<pre>';
-var_dump($_SESSION[$g]);
+var_dump($donnees['titre']);
 echo '</pre>';
 
 

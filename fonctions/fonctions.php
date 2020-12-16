@@ -18,14 +18,29 @@ catch (Exception $e)
 
 function recherche_reservation($bdd, $heuredebut, $day)
 {
-    $req = $bdd->prepare(' SELECT * FROM reservations INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id WHERE  DATE_FORMAT(debut, "%k") = :heure_debut AND DATE_FORMAT(debut, "%e") = :jour ');
+
+    $req = $bdd->prepare(' SELECT reservations.id, titre, description, login, debut, fin FROM reservations INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id WHERE DATE_FORMAT(debut, "%k") = :heure_debut AND DATE_FORMAT(debut, "%e") = :jour ');
     $req->execute(array( 'heure_debut' => $heuredebut,
                          'jour' => $day  ));
     $donnees = $req->fetch(PDO::FETCH_ASSOC);
+    // echo '<pre>';
+    // var_dump($donnees);
+    // echo '</pre>';
+    if ( $donnees!= null)
 
-    if ( $donnees!= null){echo '<a class="lien_reserve mb-0 p-0" href=""><div class="bg-primary text-dark">'.$donnees['login'].'</br><span class="text-muted ">'.$donnees['titre'].'</span></div></a>';}
+    {?>
+        
+        <a class="lien_reserve mb-0 p-0" href="pages/reservations.php"><div class="bg-primary text-dark"><?php echo $donnees['login']?></br><span class="text-muted "><?php echo $donnees['titre']?></span></div></a>
 
-    else{echo '<a class="test_lien " href="">Effectuer une réservation</a>';}    $day++;
+    <?php
+    }
+
+    else
+    {
+        echo '<a class="test_lien " href="">Effectuer une réservation</a>';
+    }
+
+    $day++;
   
 }
 

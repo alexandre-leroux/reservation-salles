@@ -83,7 +83,7 @@ while ( $plage_horaire< 23)
   
   <tbody class="mt-5">
     <tr class="text-center " >
-        <td class="text-nowrap  "><?php echo $heuredebut.'h à '. $heurefin.'h'      ;?></td>
+        <td class="text-nowrap  "><?php echo $heuredebut.'h à '. $heurefin.'h';?></td>
 
         <td class="align-middle mb-0 p-0"><?php    $day = 4;      definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;  ?></td>
 
@@ -98,7 +98,6 @@ while ( $plage_horaire< 23)
         <td class="align-middle mb-0 p-0"><?php                   definition_champs($bdd, $heuredebut, $day, $heurefin); $day++;    ?></td>
 
         <td class="align-middle mb-0 p-0"><?php                   definition_champs($bdd, $heuredebut, $day, $heurefin);   ?></td>
-
     </tr>
   </tbody>
 
