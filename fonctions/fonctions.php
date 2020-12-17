@@ -59,9 +59,15 @@ function definition_champs($bdd, $heuredebut, $day, $heurefin)
 
 }
 
+function recherche_login_existant($bdd)
 
+{
 
+$requete = $bdd->prepare('SELECT login FROM utilisateurs WHERE login = :login');
+$requete->execute(array('login' => $_POST['login']));
+$données_utilisateur = $requete->fetch();
 
+return $données_utilisateur;
 
 function affichage_details_reservation($bdd)
 {
