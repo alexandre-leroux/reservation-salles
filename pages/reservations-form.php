@@ -53,19 +53,31 @@ $donnees = affichage_details_reservation($bdd);
 
 <?php        
 
-if(isset($_POST['submit']))
-{$id =2;
+
+//---------récupération des heure et date du formulaire. Concaténation pour former un datetime, avec incrément d'une heure pour correspondre au réservations d'une heure
+$date1 = $_POST['debut-resa'];
+$date2 = $_POST['debut-resa'];
+$heure_fin = $_POST['heure_debut'];
+$date_debut = $date1 .=' '. $_POST['heure_debut'].=':00:00';
+++$heure_fin;
+$date_fin = $date2.=' '. $heure_fin .=':00:00';
+
+
+
+
+if (isset($_POST['submit']))
+  {$id =2;//-------------------------------------------------penser à mettre l'id de l'utilisateur connecté------------------------------------------------------------------------------
     echo $_POST['description'];
         $bdd = connection_bdd();
         $requete_new_user = $bdd->prepare('INSERT INTO reservations(titre, description, debut, fin, id_utilisateur) VALUES(:titre, :description, :debut, :fin, :id_utilisateur)');
                                     $requete_new_user->execute(array(
                                             'titre' => $_POST['titre'],                                                                         
                                             'description' => $_POST['description'],
-                                            'debut' => $_POST['debut-resa'],
-                                            'fin' => $_POST['Fin-resa'],
+                                            'debut' => $date_debut,
+                                            'fin' => $date_fin,
                                             'id_utilisateur' => $id //-------------------------------------------------penser à mettre l'id de l'utilisateur connecté------------------------------------------------------------------------------
                                         ));
-                                    }
+  }
 ?>
                                         
  <!-- Main Content -->
@@ -87,7 +99,7 @@ if(isset($_POST['submit']))
 <div class="control-group">
   <div class="form-group floating-label-form-group controls">
     <label>Titre de la réservation</label>
-    <input name='titre' type="text" class="form-control" placeholder="Titre de la réservation" id="titre"  data-validation-required-message="Veuillez saisir le titre de la réservation.">
+    <input name='titre' type="text" class="form-control" placeholder="Titre de la réservation" id="titre"   data-validation-required-message="Veuillez saisir le titre de la réservation.">
     <p class="help-block text-danger"></p>
   </div>
 </div>
@@ -101,26 +113,61 @@ if(isset($_POST['submit']))
 </div>
 </br></br>
 
-<p>Date et heure de début</p>
+<p>Choix du jour</p>
 <div class="control-group">
   <div class="form-group col-xs-12 floating-label-form-group controls">
     <!-- <label>2021-01-05 12:00:00</label> -->
-    <input name='debut-resa' type="text" class="form-control" value="2021-01-<?php echo $_GET['day'];?>  <?php echo $_GET['heure'];?>:00:00" id="password" readonly="readonly"   data-validation-required-message="Veuillez saisir le début de la réservation.">
+    <input name='debut-resa' type="date" class="form-control" min="2021-01-04" max="2021-01-08"   >
     <p class="help-block text-danger"></p>
   </div>
 </div>
 
 
-<p>Date et heure de fin</p>
+<p>Heure de début</p>
 <div class="control-group">
   <div class="form-group col-xs-12 floating-label-form-group controls">
-    <!-- <label>2021-01-05 13:00:00</label> -->
-    <input name='Fin-resa' type="text" class="form-control" value="2021-01-<?php echo $_GET['day'];?>  <?php echo ($_GET['heure'] +1);?>:00:00" id="password" readonly="readonly"  data-validation-required-message="Veuillez saisir le fin de la réservation.">
+    <select name="heure_debut" id="pet-heure_debut">
+      <option value="8">8h à 9h</option>
+      <option value="9">9h à 10h</option>
+      <option value="10">10h à 11h</option>
+      <option value="11">11h à 12h</option>
+      <option value="12">12h à 13h</option>
+      <option value="13">13h à 14h</option>
+      <option value="14">14h à 15h</option>
+      <option value="15">15h à 16h</option>
+      <option value="16">16h à 17h</option>
+      <option value="17">17h à 18h</option>
+      <option value="18">18h à 19h</option>
+    </select>
     <p class="help-block text-danger"></p>
   </div>
 </div>
 
+<!-- <p>Heure de fin</p>
+<div class="control-group">
+  <div class="form-group col-xs-12 floating-label-form-group controls">
+    <select name="heure_fin" id="pet-heure_fin">
+      <option value="9">9h</option>
+      <option value="10">10h</option>
+      <option value="11">11h</option>
+      <option value="12">12h</option>
+      <option value="13">13h</option>
+      <option value="14">14h</option>
+      <option value="15">15h</option>
+      <option value="16">16h</option>
+      <option value="17">17h</option>
+      <option value="18">18h</option>
+      <option value="19">19h</option>
+    </select>
+    <p class="help-block text-danger"></p>
+  </div>
+</div> -->
+
 <br>
+
+
+
+
 <p class=' text-center text-danger'>
     <?php   
             if (@$caract_mdp_non_respecte != NULL) {echo $caract_mdp_non_respecte ;}
