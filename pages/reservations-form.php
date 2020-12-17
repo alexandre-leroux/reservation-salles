@@ -51,7 +51,23 @@ $donnees = affichage_details_reservation($bdd);
             </div>
         </nav>
 
+<?php        
 
+if(isset($_POST['submit']))
+{$id =2;
+    echo $_POST['description'];
+        $bdd = connection_bdd();
+        $requete_new_user = $bdd->prepare('INSERT INTO reservations(titre, description, debut, fin, id_utilisateur) VALUES(:titre, :description, :debut, :fin, :id_utilisateur)');
+                                    $requete_new_user->execute(array(
+                                            'titre' => $_POST['titre'],                                                                         
+                                            'description' => $_POST['description'],
+                                            'debut' => $_POST['debut-resa'],
+                                            'fin' => $_POST['Fin-resa'],
+                                            'id_utilisateur' => $id //-------------------------------------------------penser à mettre l'id de l'utilisateur connecté------------------------------------------------------------------------------
+                                        ));
+                                    }
+?>
+                                        
  <!-- Main Content -->
 
  <div id='form_inscription' class="container d-flex vh-100">
@@ -65,44 +81,48 @@ $donnees = affichage_details_reservation($bdd);
                       
               ?>
         </p>
-        <form  name="sentMessage" id="contactForm" action="inscription.php" method="post">
+        <form  name="sentMessage" id="contactForm" action="reservations-form.php" method="post">
         <h1 class="text-uppercase text-center mb-3">réservation</h1>
 
 <div class="control-group">
   <div class="form-group floating-label-form-group controls">
     <label>Titre de la réservation</label>
-    <input name='titre' type="text" class="form-control" placeholder="Titre de la réservation" id="Login" required data-validation-required-message="Veuillez saisir le titre de la réservation.">
-    <p class="help-block text-danger"></p>
-  </div>
-</div>
-
-<div class="control-group">
-  <div class="form-group floating-label-form-group controls">
-    <label>Description</label>
-    <textarea name='Description' type="text" class="form-control" placeholder="Description" id="Login" required data-validation-required-message="Veuillez saisir la description."></textarea>
+    <input name='titre' type="text" class="form-control" placeholder="Titre de la réservation" id="titre"  data-validation-required-message="Veuillez saisir le titre de la réservation.">
     <p class="help-block text-danger"></p>
   </div>
 </div>
 
 <div class="control-group">
   <div class="form-group col-xs-12 floating-label-form-group controls">
-    <label>Début de la réservation</label>
-    <input name='debut-resa' type="text" class="form-control" placeholder="Début de la réservation" id="password" required  data-validation-required-message="Veuillez saisir le début de la réservation.">
+    <label>description</label>
+    <input name='description' type="text" class="form-control" placeholder="description" id="password"   data-validation-required-message="Veuillez saisir le début de la réservation.">
+    <p class="help-block text-danger"></p>
+  </div>
+</div>
+</br></br>
+
+<p>Date et heure de début</p>
+<div class="control-group">
+  <div class="form-group col-xs-12 floating-label-form-group controls">
+    <!-- <label>2021-01-05 12:00:00</label> -->
+    <input name='debut-resa' type="text" class="form-control" value="2021-01-<?php echo $_GET['day'];?>  <?php echo $_GET['heure'];?>:00:00" id="password" readonly="readonly"   data-validation-required-message="Veuillez saisir le début de la réservation.">
     <p class="help-block text-danger"></p>
   </div>
 </div>
 
+
+<p>Date et heure de fin</p>
 <div class="control-group">
   <div class="form-group col-xs-12 floating-label-form-group controls">
-    <label>Fin de la réservation</label>
-    <input name='Fin-resa' type="text" class="form-control" placeholder="Fin de la réservation" id="password" required  data-validation-required-message="Veuillez saisir le fin de la réservation.">
+    <!-- <label>2021-01-05 13:00:00</label> -->
+    <input name='Fin-resa' type="text" class="form-control" value="2021-01-<?php echo $_GET['day'];?>  <?php echo ($_GET['heure'] +1);?>:00:00" id="password" readonly="readonly"  data-validation-required-message="Veuillez saisir le fin de la réservation.">
     <p class="help-block text-danger"></p>
   </div>
 </div>
 
 <br>
 <p class=' text-center text-danger'>
-    <?php  
+    <?php   
             if (@$caract_mdp_non_respecte != NULL) {echo $caract_mdp_non_respecte ;}
 
             if (@$champs_vides != NULL) {echo $champs_vides ;}
@@ -133,7 +153,7 @@ $donnees = affichage_details_reservation($bdd);
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <!-- Contact form JS-->
         <script src="../assets/mail/jqBootstrapValidation.js"></script>
-        <script src="../assets/mail/contact_me.js"></script>
+
         <!-- Core theme JS-->
         <script src="../js/scripts.js"></script>
 
