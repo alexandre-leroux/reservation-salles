@@ -20,15 +20,9 @@
     </head>
 
     <?php
-require('../fonctions/fonctions.php');
-?>
-<?php
+        require('../fonctions/fonctions.php');
+    ?>
 
-$bdd = connection_bdd();
-
-$donnees = affichage_details_reservation($bdd);
-
-?>
 
     <body id="page-top">
 
@@ -51,8 +45,8 @@ $donnees = affichage_details_reservation($bdd);
             </div>
         </nav>
 
-<?php        
 
+<?php        
 
 //---------récupération des heure et date du formulaire. Concaténation pour former un datetime, avec incrément d'une heure pour correspondre au réservations d'une heure
 $date1 = $_POST['debut-resa'];
@@ -65,19 +59,23 @@ $date_fin = $date2.=' '. $heure_fin .=':00:00';
 
 
 
+
+
 if (isset($_POST['submit']))
-  {$id =2;//-------------------------------------------------penser à mettre l'id de l'utilisateur connecté------------------------------------------------------------------------------
-    echo $_POST['description'];
-        $bdd = connection_bdd();
-        $requete_new_user = $bdd->prepare('INSERT INTO reservations(titre, description, debut, fin, id_utilisateur) VALUES(:titre, :description, :debut, :fin, :id_utilisateur)');
-                                    $requete_new_user->execute(array(
-                                            'titre' => $_POST['titre'],                                                                         
-                                            'description' => $_POST['description'],
-                                            'debut' => $date_debut,
-                                            'fin' => $date_fin,
-                                            'id_utilisateur' => $id //-------------------------------------------------penser à mettre l'id de l'utilisateur connecté------------------------------------------------------------------------------
-                                        ));
-  }
+    {  
+      if ( verif_champs_vides($_POST['titre'],$_POST['description'],$_POST['debut-resa'],$_POST['heure_debut'] == TRUE ))
+            {
+              if ( verif_creneau_non_libre($date_debut,$date_fin) == FALSE)
+
+                    {
+                      $id =2;//-------------------------------------------------penser à mettre l'id de l'utilisateur connecté------------------------------------------------------------------------------
+                      enregistrment_reservation($_POST['titre'],$_POST['description'], $date_debut,$date_fin,$id);
+                    }
+
+              else     { $existedeja = '  existedeja';} 
+            }      
+        else { $pasbon = ' pas bon';}
+    } 
 ?>
                                         
  <!-- Main Content -->
@@ -169,7 +167,9 @@ if (isset($_POST['submit']))
 
 
 <p class=' text-center text-danger'>
-    <?php   
+    <?php   echo $pasbon;
+            echo $existedeja;
+
             if (@$caract_mdp_non_respecte != NULL) {echo $caract_mdp_non_respecte ;}
 
             if (@$champs_vides != NULL) {echo $champs_vides ;}

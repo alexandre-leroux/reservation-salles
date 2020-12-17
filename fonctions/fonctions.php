@@ -91,10 +91,45 @@ function affichage_details_reservation($bdd)
 }
 
 
+function verif_champs_vides($a,$b,$c,$d)
+{
+    if ($a != NULL AND $b != NULL AND $c != NULL AND $d != NULL)
+    { return TRUE;}
+    else
+    { return false;}
 
+}
 
+function verif_creneau_non_libre($a,$b)
+{
+    
+    $bdd = connection_bdd();
+    $req = $bdd->prepare(' SELECT * FROM reservations  WHERE debut = :debut AND fin = :fin ');
+    $req->execute(array(    'debut' => $a,
+                            'fin' => $b,
+                         ));
+    $donnees = $req->fetch(PDO::FETCH_ASSOC);
+    $bdd = NULL;
+    if(empty($donnees))
+    {return FALSE;}
+    else {return TRUE;}
 
+}
 
+function enregistrment_reservation($a,$b,$c,$d,$e)
+{
+    $bdd = connection_bdd();
+    $requete_new_user = $bdd->prepare('INSERT INTO reservations(titre, description, debut, fin, id_utilisateur) VALUES(:titre, :description, :debut, :fin, :id_utilisateur)');
+    $requete_new_user->execute(array(
+                        'titre' => $a,                                                                         
+                        'description' =>$b,
+                        'debut' => $c, // $date_debut,
+                        'fin' => $d, //$date_fin,
+                        'id_utilisateur' => $e //-------------------------------------------------penser à mettre l'id de l'utilisateur connecté------------------------------------------------------------------------------
+                                    ));
+    $bdd = NULL;
+
+}
 
 
 
