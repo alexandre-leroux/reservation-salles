@@ -85,28 +85,7 @@ if ( isset($_POST['submit']) )
 
                             {
 
-                              if ( strlen($_POST['password']) >= 8 AND strlen($_POST['password']) <= 15 AND preg_match('#[a-z]#',$_POST['password']) AND  preg_match('#[A-Z]#',$_POST['password']) AND  preg_match('#[\W_]#',$_POST['password']) AND  preg_match('#[0-9]#',$_POST['password']) ) 
-                                
-                                  {
-                            
-                                    $requete_new_user = $bdd->prepare('INSERT INTO utilisateurs(login, password) VALUES(:login, :password)');
-                                    $requete_new_user->execute(array(
-                                            'login' => $login,                                                                         
-                                            'password' => $password,));
-                                        
-                                           
-                                   
-                                      $inscription_reussie = 1;
-
-                                    
-                                  }
-
-                              else 
-                              
-                                  {
-                                    $caract_mdp_non_respecte = 'le mot de passe doit contenir entre 8 et 15 caractères, avec au minimum : Une majuscule, un chiffre et un caractère spécial.';
-                                    $bdd = null;
-                                  }    
+                              $inscription_reussie = inscription_utilisateur($login,$password);
 
                             }
 
@@ -129,7 +108,7 @@ if ( isset($_POST['submit']) )
  <!-- Main Content -->
  <div id='form_inscription' class="container d-flex vh-100">
     <div class="row  h-75 my-auto mx-auto w-75">
-      <div class="col-12 w-75 h-75 my-auto ">
+      <div class="col-12 w-75 h-75 my-auto  ">
       <p class=' text-center text-success'>
               <?php  
                  
@@ -137,12 +116,12 @@ if ( isset($_POST['submit']) )
                       
               ?>
         </p>
-        <form  name="sentMessage" id="contactForm" action="inscription.php" method="post">
+        <form class="mt-5 pt-5"  name="sentMessage" id="contactForm" action="inscription.php" method="post">
 
-<div class="control-group">
+<div class="control-group  ">
   <div class="form-group floating-label-form-group controls">
     <label>Choisissez votre login</label>
-    <input name='login' type="text" class="form-control" placeholder="Choisissez votre login" id="Login" required data-validation-required-message="Veuillez saisir votre login.">
+    <input name='login' type="text" class="form-control" placeholder="Choisissez votre login" id="Login"  data-validation-required-message="Veuillez saisir votre login.">
     <p class="help-block text-danger"></p>
   </div>
 </div>
@@ -150,7 +129,7 @@ if ( isset($_POST['submit']) )
 <div class="control-group">
   <div class="form-group col-xs-12 floating-label-form-group controls">
     <label>Mot de passe</label>
-    <input name='password' type="password" class="form-control" placeholder="Mot de passe" id="password" required  data-validation-required-message="Veuillez saisir votre mot de passe.">
+    <input name='password' type="password" class="form-control" placeholder="Mot de passe" id="password"   data-validation-required-message="Veuillez saisir votre mot de passe.">
     <p class="help-block text-danger"></p>
   </div>
 </div>
@@ -158,7 +137,7 @@ if ( isset($_POST['submit']) )
 <div class="control-group">
   <div class="form-group col-xs-12 floating-label-form-group controls">
     <label>Confirmer le mot de passe</label>
-    <input name='confirm_password' type="password" class="form-control" placeholder="Confirmer le mot de passe" id="password" required  data-validation-required-message="Veuillez saisir votre mot de passe.">
+    <input name='confirm_password' type="password" class="form-control" placeholder="Confirmer le mot de passe" id="password"   data-validation-required-message="Veuillez saisir votre mot de passe.">
     <p class="help-block text-danger"></p>
   </div>
 </div>

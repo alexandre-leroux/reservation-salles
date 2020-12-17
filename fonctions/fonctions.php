@@ -133,6 +133,35 @@ function enregistrment_reservation($a,$b,$c,$d,$e)
 
 
 
+function inscription_utilisateur($a,$b)
+{
+    if (  preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$#',$_POST['password']) ) 
+      
+        {
+            $bdd = connection_bdd();
+          $requete_new_user = $bdd->prepare('INSERT INTO utilisateurs(login, password) VALUES(:login, :password)');
+          $requete_new_user->execute(array(
+                  'login' => $a,                                                                         
+                  'password' => $b,));
+              
+                 
+            $bdd = null;
+            return $inscription_reussie = 1;
+
+          
+        }
+
+    else 
+    
+        {   
+            $bdd = null;
+            return $caract_mdp_non_respecte = 'le mot de passe doit contenir entre 8 et 15 caractères, avec au minimum : Une majuscule, un chiffre et un caractère spécial.';
+        
+        }   
+}
+
+
+
 
 
 

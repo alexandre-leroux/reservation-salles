@@ -72,9 +72,9 @@ if (isset($_POST['submit']))
                       enregistrment_reservation($_POST['titre'],$_POST['description'], $date_debut,$date_fin,$id);
                     }
 
-              else     { $existedeja = '  existedeja';} 
+              else     { $creneau_deja_pris = '  Ce créneau n\'est pas disponible';} 
             }      
-        else { $pasbon = ' pas bon';}
+        else { $champs_vides = ' Veullez saisir tous les champs';}
     } 
 ?>
                                         
@@ -114,7 +114,6 @@ if (isset($_POST['submit']))
 <p>Choix du jour</p>
 <div class="control-group">
   <div class="form-group col-xs-12 floating-label-form-group controls">
-    <!-- <label>2021-01-05 12:00:00</label> -->
     <input name='debut-resa' type="date" class="form-control" min="2021-01-04" max="2021-01-08"   >
     <p class="help-block text-danger"></p>
   </div>
@@ -140,43 +139,17 @@ if (isset($_POST['submit']))
     <p class="help-block text-danger"></p>
   </div>
 </div>
-
-<!-- <p>Heure de fin</p>
-<div class="control-group">
-  <div class="form-group col-xs-12 floating-label-form-group controls">
-    <select name="heure_fin" id="pet-heure_fin">
-      <option value="9">9h</option>
-      <option value="10">10h</option>
-      <option value="11">11h</option>
-      <option value="12">12h</option>
-      <option value="13">13h</option>
-      <option value="14">14h</option>
-      <option value="15">15h</option>
-      <option value="16">16h</option>
-      <option value="17">17h</option>
-      <option value="18">18h</option>
-      <option value="19">19h</option>
-    </select>
-    <p class="help-block text-danger"></p>
-  </div>
-</div> -->
-
 <br>
 
 
 
 
 <p class=' text-center text-danger'>
-    <?php   echo $pasbon;
-            echo $existedeja;
-
-            if (@$caract_mdp_non_respecte != NULL) {echo $caract_mdp_non_respecte ;}
+    <?php   
 
             if (@$champs_vides != NULL) {echo $champs_vides ;}
 
-            if (@$mdp_pas_identiques != NULL) {echo  $mdp_pas_identiques ;}
-  
-            if (@$login_deja_pris != NULL) {echo  $login_deja_pris ;}
+            if (@$creneau_deja_pris != NULL) {echo $creneau_deja_pris ;}
 
     ?>
 </p>
