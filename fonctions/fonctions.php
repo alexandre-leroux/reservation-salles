@@ -40,7 +40,11 @@ function recherche_reservation($bdd, $heuredebut, $day)
 
     else
     {
-        echo '<a class="test_lien " href="">Effectuer une réservation</a>';
+        // var_dump($day,$heuredebut)
+        ?>
+        <a class="test_lien " href="pages/reservations-form.php?day=<?php echo $day;?>&heure=<?php echo $heuredebut;?> ">Effectuer une réservation</a>
+        <?php
+        // echo '<a class="test_lien " href="">Effectuer une réservation</a>';
     }
 
     $day++;
