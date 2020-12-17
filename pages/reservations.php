@@ -22,6 +22,13 @@
     <?php
 require('../fonctions/fonctions.php');
 ?>
+<?php
+
+$bdd = connection_bdd();
+
+$donnees = affichage_details_reservation($bdd);
+
+?>
 
     <body id="page-top">
 
@@ -44,39 +51,22 @@ require('../fonctions/fonctions.php');
             </div>
         </nav>
 
-<?php
-echo '<pre>';
-var_dump($_GET['id']);
-echo '</pre>';
-echo $_GET['id'];
+<div class="container bg-primary d-flex  vh-100">
+<div class="row bg-success h-75 w-75 mx-auto my-auto">
+<div class="col-12 bg-warning mx-auto mt-5">
+<h1>Salle reservée par : <?php echo $donnees['login']; ?></h1>
 
+<?php $date = date_create($donnees['fin']); ?>
 
-try 
-{
-    $bdd = new PDO('mysql:host=localhost;dbname=reservationsalles;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
-catch (Exception $e)
-{
-    die('Erreur : ' . $e->getMessage());
-}
+<h1>du : <?php  date_format($date, ' H:i:s') ; ?>  à  </h1>
 
+$donnees['DATE_FORMAT(debut, "%e/%b/%Y/%k")']
+$date->format('Y-m-d H:i:s')
+
+</div></div></div>
 
 
 
-
-
-
-$req = $bdd->prepare(' SELECT * FROM reservations WHERE id = :id ');
-$req->execute(array( 'id' => $_GET['id']
-                     ));
-$donnees = $req->fetch(PDO::FETCH_ASSOC);
-echo '<pre>';
-var_dump($donnees);
-echo '</pre>';
-
-
-
-?>
   
 
 </div>

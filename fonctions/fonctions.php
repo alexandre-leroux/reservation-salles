@@ -63,7 +63,18 @@ function definition_champs($bdd, $heuredebut, $day, $heurefin)
 
 
 
+function affichage_details_reservation($bdd)
+{
+    $req = $bdd->prepare(' SELECT titre, description, login,DATE_FORMAT(debut, "%e/%b/%Y/%k"),fin FROM reservations INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id WHERE reservations.id = :id ');
+    $req->execute(array( 'id' => $_GET['id']
+                         ));
+    $donnees = $req->fetch(PDO::FETCH_ASSOC);
+    echo '<pre>';
+    var_dump($donnees);
+    echo '</pre>';
+    return $donnees;
 
+}
 
 
 
