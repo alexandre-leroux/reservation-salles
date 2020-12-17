@@ -1,7 +1,7 @@
 <?php session_start();?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -19,40 +19,24 @@
         <link href="../css/styles.css" rel="stylesheet" />
     </head>
 
-    <?php
-        require('../fonctions/fonctions.php');
-    ?>
 
 
     <body id="page-top">
 
+    <?php
+ require('../fonctions/fonctions.php');
+ include '../includes/header-nav.php';
+ ?>
 
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">futuroom</a>
-                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">S'inscrire</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Se connecter</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Disponibilité</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
 
 
 <?php        
 
 //---------récupération des heure et date du formulaire. Concaténation pour former un datetime, avec incrément d'une heure pour correspondre au réservations d'une heure
-$date1 = $_POST['debut-resa'];
-$date2 = $_POST['debut-resa'];
-$heure_fin = $_POST['heure_debut'];
-$date_debut = $date1 .=' '. $_POST['heure_debut'].=':00:00';
+$date1 = @$_POST['debut-resa'];
+$date2 = @$_POST['debut-resa'];
+$heure_fin = @$_POST['heure_debut'];
+$date_debut = $date1 .=' '. @$_POST['heure_debut'].=':00:00';
 ++$heure_fin;
 $date_fin = $date2.=' '. $heure_fin .=':00:00';
 
@@ -120,7 +104,7 @@ if (isset($_POST['submit']))
 </div>
 
 
-<p>Heure de début</p>
+<p>Choix du créneaux</p>
 <div class="control-group">
   <div class="form-group col-xs-12 floating-label-form-group controls">
     <select name="heure_debut" id="pet-heure_debut">
@@ -163,7 +147,9 @@ if (isset($_POST['submit']))
 
 
 
-  
+  <?php
+            include '../includes/footer.php';
+        ?>
 
 </div>
         <!-- Bootstrap core JS-->

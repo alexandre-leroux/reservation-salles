@@ -33,7 +33,7 @@ function recherche_reservation($bdd, $heuredebut, $day)
 
         ?>
         
-        <a class="lien_reserve mb-0 p-0" href="pages/reservations.php?id=<?php echo $_GET_['id'];?> "><div class="bg-primary text-dark"><?php echo $donnees['login']?></br><span class="text-muted "><?php echo $donnees['titre']?></span></div></a>
+        <a class="lien_reserve mb-0 p-0" href="../pages/reservations.php?id=<?php echo $_GET_['id'];?> "><div class="bg-primary text-dark"><?php echo $donnees['login']?></br><span class="text-muted "><?php echo $donnees['titre']?></span></div></a>
 
     <?php
     }
@@ -42,7 +42,7 @@ function recherche_reservation($bdd, $heuredebut, $day)
     {
         // var_dump($day,$heuredebut)
         ?>
-        <a class="test_lien " href="pages/reservations-form.php?day=<?php echo $day;?>&heure=<?php echo $heuredebut;?> ">Effectuer une réservation</a>
+        <a class="test_lien " href="../pages/reservations-form.php ">Effectuer une réservation</a>
         <?php
         // echo '<a class="test_lien " href="">Effectuer une réservation</a>';
     }
@@ -164,6 +164,17 @@ function inscription_utilisateur($a,$b)
 
 
 
+
+function connexion_utilisateur($a)
+{
+
+    $bdd = connection_bdd();
+    $requete = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = :login');
+    $requete->execute(array('login' => $a));
+    $données_utilisateur = $requete->fetch();
+    $bdd = NULL;
+    return  $données_utilisateur;
+}
 
 
 

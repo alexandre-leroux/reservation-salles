@@ -19,9 +19,14 @@
         <link href="../css/styles.css" rel="stylesheet" />
     </head>
 
+
+
+
+    <body id="page-top">
     <?php
-require('../fonctions/fonctions.php');
-?>
+ require('../fonctions/fonctions.php');
+ include '../includes/header-nav.php';
+ ?>
 <?php
 
 $bdd = connection_bdd();
@@ -29,27 +34,6 @@ $bdd = connection_bdd();
 $donnees = affichage_details_reservation($bdd);
 
 ?>
-
-    <body id="page-top">
-
-
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">futuroom</a>
-                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">S'inscrire</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Se connecter</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Disponibilité</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
 
 <div class="container  d-flex  vh-100">
 <div class="row  h-75 w-75 mx-auto my-auto">
@@ -91,7 +75,9 @@ $donnees = affichage_details_reservation($bdd);
         <script src="../js/scripts.js"></script>
 
 
-
+        <?php
+            include '../includes/footer.php';
+        ?>
         
     </body>
 </html>
