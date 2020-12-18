@@ -177,8 +177,28 @@ function connexion_utilisateur($a)
 }
 
 
+function verif_password($a)
+{
 
+    $bdd = connection_bdd();
+    $requete = $bdd->prepare('SELECT password FROM utilisateurs WHERE id = :id');
+    $requete->execute(array('id' => $a));
+    $donnees = $requete->fetch();
+    $bdd = NULL;
+    return  $donnees;
+}
 
+function modification_login($a)
+{
+
+    $bdd = connection_bdd();
+    $requete = $bdd->prepare('UPDATE utilisateurs SET login=:login WHERE id=:id');
+    $requete->execute(array('login'=>$login, 'id'=>$_SESSION['id']));
+    $bdd = NULL;
+    echo '<meta http-equiv="refresh" content="2;url=profil.php" />';
+    return 'Le login a bien été modifié';
+    
+}
 
 
 

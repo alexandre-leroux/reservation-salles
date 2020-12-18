@@ -1,5 +1,5 @@
 <?php session_start();
-// if (isset($_SESSION['login']) and isset($_SESSION['id'])){header('location:../index.php');}
+if (isset($_SESSION['login']) and isset($_SESSION['id'])){header('location:../index.php');}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -100,7 +100,7 @@ if ( isset($_POST['submit']) )
               ?>
         </p>
         <form class="mt-5 pt-5"  name="sentMessage" id="contactForm" action="inscription.php" method="post">
-
+        <h1 class="text-uppercase text-center mb-3">inscription</h1>
 <div class="control-group  ">
   <div class="form-group floating-label-form-group controls">
     <label>Choisissez votre login</label>

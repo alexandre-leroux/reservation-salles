@@ -1,5 +1,5 @@
 <?php session_start();
-// if (isset($_SESSION['login']) and isset($_SESSION['id'])){header('location:../index.php');}
+if (isset($_SESSION['login']) and isset($_SESSION['id'])){header('location:../index.php');}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -85,6 +85,7 @@ if ( isset($_POST['submit']))
       ?>
 
         <form name="connexion"  action="connexion.php#form1"  method="post">
+        <h1 class="text-uppercase text-center mb-3">connexion</h1>
           <p class=" text-center text-primary">
           </p>
           <div class="control-group">
