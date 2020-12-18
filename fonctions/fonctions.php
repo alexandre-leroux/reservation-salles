@@ -188,17 +188,43 @@ function verif_password($a)
     return  $donnees;
 }
 
-function modification_login($a)
+function modification_login($a,$b)
 {
 
     $bdd = connection_bdd();
     $requete = $bdd->prepare('UPDATE utilisateurs SET login=:login WHERE id=:id');
-    $requete->execute(array('login'=>$login, 'id'=>$_SESSION['id']));
+    $requete->execute(array('login'=>$a, 'id'=>$b));
     $bdd = NULL;
     echo '<meta http-equiv="refresh" content="2;url=profil.php" />';
     return 'Le login a bien été modifié';
     
 }
+
+function maj_login($a)
+{
+
+    connection_bdd();
+    $bdd = connection_bdd();
+    $requete = $bdd->prepare('SELECT login FROM utilisateurs WHERE id = :id');
+    $requete->execute(array( 'id' => $a));
+    $donnees = $requete->fetch();
+    $bdd=NULL;
+    return $donnees['login'];
+    
+}
+
+
+function maj_password($a,$b)
+{
+
+    $bdd = connection_bdd();
+    $requete = $bdd->prepare('UPDATE utilisateurs SET password=:password WHERE id=:id');
+    $requete->execute(array('password'=>$a, 'id'=>$b));
+    $bdd = NULL;
+    return $mot_passe_change = 'Votre mot de passe a bien été mis à jour';
+    
+}
+
 
 
 

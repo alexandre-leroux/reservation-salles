@@ -8,7 +8,7 @@ if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Freelancer - Start Bootstrap Theme</title>
+        <title>FUTUROOM</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -26,8 +26,10 @@ if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../
 
 <?php
  require('../fonctions/fonctions.php');
- include '../includes/header-nav.php';
 
+ $_SESSION['login'] = maj_login( $_SESSION['id']);
+
+ include '../includes/header-nav.php';
 ?>
 
 
@@ -55,16 +57,16 @@ if ( isset($_POST['submit']) )//check bouton submit
 
                         {
 
-                            if ( $original_password != NULL)// on vérifie le password d'origine pour modifier le login
+                            if ($_POST['original_password'] != NULL)// on vérifie le password d'origine pour modifier le login
 
                                     {
-                                        verif_password($_POST['original_password']);
+                                        $donnees = verif_password($_SESSION['id']);
 
                                           if (password_verify($_POST['original_password'], $donnees['password']  ))// si ok, on peut updater le login
                                                   
                                                 {
 
-                                                  $login_modifie = modification_login($a);
+                                                  $login_modifie = modification_login($login,$_SESSION['id']);
                                       
                                                 }
 
@@ -90,24 +92,20 @@ if ( isset($_POST['submit']) )//check bouton submit
                         {
                                 if ( $_POST['confirm_password'] == $_POST['password']  )
                                       {
-                                        connection_bdd();
+
                                         $bdd = connection_bdd();
                                         $requete = $bdd->prepare('SELECT password FROM utilisateurs WHERE id = :id');
                                         $requete->execute(array('id' => $_SESSION['id']));
-                                        $donnees = $requete->fetchall();
+                                        $donnees = $requete->fetch();
                                         $bdd = NULL;
 
-                                           if (password_verify($_POST['original_password'], $donnees[0]['password']  ))
+                                           if (password_verify($_POST['original_password'], $donnees['password']  ))
 
                                                     { 
-                                                      connection_bdd();
-                                                      $bdd = connection_bdd();
-                                                      $requete = $bdd->prepare('UPDATE utilisateurs SET password=:password WHERE id=:id');
-                                                      $requete->execute(array('password'=>$password, 'id'=>$_SESSION['id']));
-                                                      $bdd = NULL;
-                                                    
-                                                     $mot_passe_change = 'Votre mot de passe a bien été mis à jour';
-                                                     echo '<meta http-equiv="refresh" content="2;url=profil.php" />';
+
+                                                      $mot_passe_change = maj_password($password, $_SESSION['id']);
+                                             
+                                                      echo '<meta http-equiv="refresh" content="2;url=profil.php" />';
                                                     
                                                     }
                                           else { $erreur_password = 'Mot de passe incorrect'; }
@@ -182,7 +180,7 @@ if ( isset($_POST['submit']) )//check bouton submit
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
               <label>Modifier le password</label>
-              <input type="password" class="form-control" placeholder="Password" name="password"  data-validation-required-message="Veuillez saisir votre mot de passe.">
+              <input type="password" class="form-control" placeholder="Modifier le password" name="password"  data-validation-required-message="Veuillez saisir votre mot de passe.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -190,7 +188,7 @@ if ( isset($_POST['submit']) )//check bouton submit
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
               <label>Confirmer le nouveau password</label>
-              <input type="password" class="form-control" placeholder="Password" name="confirm_password"  data-validation-required-message="Veuillez saisir votre mot de passe.">
+              <input type="password" class="form-control" placeholder="Confirmer le nouveau password" name="confirm_password"  data-validation-required-message="Veuillez saisir votre mot de passe.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -198,14 +196,14 @@ if ( isset($_POST['submit']) )//check bouton submit
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
               <label>Saisir votre mot de passe actuel :</label>
-              <input type="password" class="form-control" placeholder="Password" name="original_password"  data-validation-required-message="Veuillez saisir votre mot de passe.">
+              <input type="password" class="form-control" placeholder="Saisir votre mot de passe actuel" name="original_password"  data-validation-required-message="Veuillez saisir votre mot de passe.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
 
           <br>
           <p class="text-center text-danger"><?php if(isset($saisir_password)){echo $saisir_password;}?></p>
-                  <p class="text-center text-danger"><?php if(isset($erreur_password)){echo $erreur_password;}?></p>
+          <p class="text-center text-danger"><?php if(isset($erreur_password)){echo $erreur_password;}?></p>
 
           <div id="success"></div>
           <button type="submit" name="submit" class="btn btn-primary" id="sendMessageButton">Valider les modifications</button>
@@ -215,6 +213,7 @@ if ( isset($_POST['submit']) )//check bouton submit
   </div>
 
 <?php
+
   include '../includes/footer.php';
 ?>
 

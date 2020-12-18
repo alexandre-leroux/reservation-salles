@@ -23,7 +23,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item mx-0 mx-lg-1">
                             <?php  if(!isset($_SESSION['id'])) { echo '<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="pages/inscription.php">S\'inscrire</a>' ;} ?>
-                            <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="pages/profil.php">'. $_SESSION['login'].'</a> ' ; }?>
+                            <?php  if(isset($_SESSION['id'])) { echo '<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="pages/profil.php">'. $_SESSION['login'].'</a>' ; }?>
                         </li>
                         <li class="nav-item mx-0 mx-lg-1">
                              <?php  if(!isset($_SESSION['id'])) { echo '<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="pages/connexion.php">Se connecter</a>' ;} ?>

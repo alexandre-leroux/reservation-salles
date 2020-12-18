@@ -9,7 +9,7 @@ if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Au revoir</title>
+        <title>FUTUROOM</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -41,7 +41,8 @@ if (!isset($_SESSION['login']) and !isset($_SESSION['id'])){header('location:../
                 <!-- Icon Divider-->
 </br> 
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Merci de votre visite. A bientôt sur FUTUROOM</p>
+                <p class="masthead-subheading font-weight-light mb-0">Merci de votre visite.</p>
+                <p class="masthead-subheading font-weight-light mb-0">A bientôt sur FUTUROOM</p>
             </div>
         </header>
 <?php
