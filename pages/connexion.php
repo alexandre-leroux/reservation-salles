@@ -26,6 +26,8 @@ if (isset($_SESSION['login']) and isset($_SESSION['id'])){header('location:../in
     <?php
  require('../fonctions/fonctions.php');
  include '../includes/header-nav.php';
+ include '../class/User.php';
+ $user = new User();
  ?>
 
 
