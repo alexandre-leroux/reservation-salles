@@ -16,9 +16,9 @@ $donnees = affichage_details_reservation($bdd);
 <?php  
     $date = date_create($donnees['debut']); 
     $date_jour =  date_format($date, ' d m Y');
-    $heure_debut = date_format($date, ' h ');
+    $heure_debut = date_format($date, ' H ');
     $date_fin = date_create($donnees['fin']);
-    $heure_fin = date_format($date_fin, ' h ');
+    $heure_fin = date_format($date_fin, ' H ');
  ?>
 <h1 class="mt-5">Salle reservée par : <?php echo $donnees['login']; ?></h1></br>
 <h1>Le <?php echo $date_jour ; ?>  de<?php echo $heure_debut ; ?>h à <?php echo $heure_fin ; ?>h </h1></br>

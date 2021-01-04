@@ -22,6 +22,7 @@ if (isset($_POST['submit']))
                     {
                      //-------------------------------------------------penser à mettre l'id de l'utilisateur connecté------------------------------------------------------------------------------
                       enregistrment_reservation($_POST['titre'],$_POST['description'], $date_debut,$date_fin,$_SESSION['id']);
+                      $reservation_ok = 'Créneau bien réservé';
                     }
 
               else     { $creneau_deja_pris = '  Ce créneau n\'est pas disponible';} 
@@ -102,6 +103,14 @@ if (isset($_POST['submit']))
             if (@$champs_vides != NULL) {echo $champs_vides ;}
 
             if (@$creneau_deja_pris != NULL) {echo $creneau_deja_pris ;}
+            
+
+    ?>
+</p>
+<p class=' text-center text-primary'>
+    <?php   
+
+            if (@$reservation_ok != NULL) {echo $reservation_ok ;}
 
     ?>
 </p>
